@@ -2,6 +2,14 @@ plugins {
     id 'org.springframework.boot' version '3.4.4'
     id 'io.freefair.lombok' version '8.14'
     id 'checkstyle'
+    id "org.sonarqube" version "7.2.3.7755"
+}
+
+sonar {
+  properties {
+    property "sonar.projectKey", "yegorkin2_track-me"
+    property "sonar.organization", "yegorkin2"
+  }
 }
 
 gradle.startParameter.parallelProjectExecutionEnabled = true
