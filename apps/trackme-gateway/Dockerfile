@@ -8,14 +8,14 @@ COPY build.gradle settings.gradle gradle /app/
 COPY apps/trackme-gateway/build.gradle /app/apps/trackme-gateway/
 
 # 2. Прогреваем зависимости (кеширует максимально)
-RUN --mount=type=cache,target=/root/.gradle gradle :trackme-gateway:dependencies --no-daemon
+RUN --mount=type=cache,target=/root/.gradle,id=gradle-cache-gateway-deps gradle :trackme-gateway:dependencies --no-daemon
 
 # 3. Копируем исходники только нужного приложения и его зависимости
 COPY platform /app/platform
 COPY apps/trackme-gateway /app/apps/trackme-gateway
 
 # 4. Сборка JAR (кешируется благодаря шагам выше)
-RUN --mount=type=cache,target=/root/.gradle gradle :trackme-gateway:clean :trackme-gateway:bootJar --no-daemon
+RUN --mount=type=cache,target=/root/.gradle,id=gradle-cache-gateway-clean gradle :trackme-gateway:clean :trackme-gateway:bootJar --no-daemon
 
 # ----------- Runtime stage -----------
 FROM eclipse-temurin:21-jre-alpine

@@ -26,7 +26,7 @@ configurations {
 }
 
 dependencies {
-    implementation platform(project(':platform'))
+    implementation platform(project(':platform')) 
 
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -74,9 +74,10 @@ springBoot {
 sonar {
     properties {
         property "sonar.language", "java"
-        property "sonar.projectKey", "akarmanov2022_track-me_backend"
-        property "sonar.organization", "akarmanov2022"
+        property "sonar.projectKey", "yegorkin2_track-me_backend"
+        property "sonar.organization", "yegorkin2"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.java.checkstyle.reportPaths", "build/reports/checkstyle/main.xml,build/reports/checkstyle/test.xml"
+        property "sonar.login", System.getenv("SONAR_TOKEN")
     }
 }

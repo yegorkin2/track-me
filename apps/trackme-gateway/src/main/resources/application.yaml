@@ -146,9 +146,9 @@ spring:
       client:
         provider:
           track-me-client:
-            # host.docker.internal: used for internal OIDC discovery and JWT validation
+            # trackme-sso: used for internal OIDC discovery and JWT validation
             # (container-to-container via host). Must match SSO_URI / SSO issuer.
-            issuer-uri: http://host.docker.internal:9000
+            issuer-uri: http://trackme-sso:9000
             # localhost:9000: used for browser redirects to SSO login/logout pages.
             # SSO exposes port 9000, so the browser on the host reaches it directly.
             authorization-uri: http://localhost:9000/oauth2/authorize

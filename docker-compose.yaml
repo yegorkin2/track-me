@@ -62,7 +62,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker-local
       - BACKEND_URI=http://localhost
       - FRONTEND_URI=http://localhost
-      - SSO_URI=http://host.docker.internal:9000
+      - SSO_URI=http://trackme-sso:9000
     platform: linux/amd64
     restart: always
     env_file:
@@ -117,7 +117,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker-local
       - BACKEND_URI=http://localhost
       - FRONTEND_URI=http://localhost
-      - SSO_URI=http://host.docker.internal:9000
+      - SSO_URI=http://trackme-sso:9000
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
       interval: 30s
@@ -155,7 +155,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker-local
       - BACKEND_URI=http://localhost
       - AFTER_LOGOUT_URI=http://localhost
-      - SSO_URI=http://host.docker.internal:9000
+      - SSO_URI=http://trackme-sso:9000
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/actuator/health" ]
       interval: 30s

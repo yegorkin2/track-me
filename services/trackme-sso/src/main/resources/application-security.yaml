@@ -42,7 +42,7 @@ spring:
   security:
     oauth2:
       authorizationserver:
-        issuer: http://host.docker.internal:9000
+        issuer: http://trackme-sso:9000
       resourceserver:
         jwt:
-          issuer-uri: http://host.docker.internal:9000
+          issuer-uri: http://trackme-sso:9000

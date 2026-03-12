@@ -9,7 +9,7 @@ COPY build.gradle settings.gradle /app/
 COPY gradle /app/gradle
 
 # 2. Прогреваeм зависимости Gradle (минимально изменяется)
-RUN --mount=type=cache,target=/root/.gradle gradle dependencies
+RUN --mount=type=cache,target=/root/.gradle,id=gradle-cache-telegram-deps gradle dependencies
 
 # 3. Копируем исходники приложения
 COPY libs/commons /app/libs/commons
@@ -17,7 +17,7 @@ COPY platform /app/platform
 COPY services/telegram-service /app/services/telegram-service
 
 # 4. Собираем проект
-RUN --mount=type=cache,target=/root/.gradle gradle :telegram-service:bootJar -Pprod
+RUN --mount=type=cache,target=/root/.gradle,id=gradle-cache-telegram-clean gradle :telegram-service:bootJar -Pprod
 
 FROM eclipse-temurin:21-jre-alpine
 

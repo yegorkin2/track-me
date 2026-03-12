@@ -20,7 +20,7 @@
 | Docker Compose | ≥ 2.22 | Оркестрация сервисов (`compose watch`) |
 | Git | любая | Клонирование репозитория |
 
-> **macOS / Windows**: Docker Desktop включает Docker Compose и поддержку `host.docker.internal` из коробки.
+> **macOS / Windows**: Docker Desktop включает Docker Compose и поддержку `trackme-sso` из коробки.
 
 ---
 
@@ -120,7 +120,7 @@ trackme-client-gateway :8081
 | Переменная | Значение в docker-compose | Описание |
 |---|---|---|
 | `SPRING_PROFILES_ACTIVE` | `docker-local` | Активный Spring-профиль |
-| `SSO_URI` | `http://host.docker.internal:9000` | Внутренний адрес SSO для OIDC discovery |
+| `SSO_URI` | `http://trackme-sso:9000` | Внутренний адрес SSO для OIDC discovery |
 | `BACKEND_URI` | `http://localhost` | Публичный адрес (через Nginx) |
 | `AFTER_LOGIN_URL` | `http://localhost` | Fallback-редирект после логина |
 | `AFTER_LOGOUT_URI` | `http://localhost` | Редирект после логаута |
@@ -129,7 +129,7 @@ trackme-client-gateway :8081
 | `CORS_ORIGINS` | `http://localhost,...` | Разрешённые CORS-источники |
 | `REACT_APP_BACKEND_URI` | `http://localhost` | Адрес gateway для фронтенда |
 
-> **Почему `host.docker.internal` для SSO?** Gateway и backend обращаются к SSO изнутри Docker-сети для OIDC discovery и валидации JWT. Браузер редиректится на `http://localhost:9000` напрямую (SSO экспонирует порт 9000).
+> **Почему `trackme-sso` для SSO?** Gateway и backend обращаются к SSO изнутри Docker-сети для OIDC discovery и валидации JWT. Браузер редиректится на `http://localhost:9000` напрямую (SSO экспонирует порт 9000).
 
 ---
 
@@ -202,9 +202,9 @@ docker compose logs trackme-redis
 ### `Unable to resolve Configuration with the provided Issuer`
 
 **Причина**: в `.env` задана переменная `SSO_URI`, которая переопределяет значение из `docker-compose.yaml`.
-**Решение**: убедитесь, что в `.env` переменная `SSO_URI` отсутствует или закомментирована. В `docker-compose.yaml` уже выставлено правильное значение `http://host.docker.internal:9000`.
+**Решение**: убедитесь, что в `.env` переменная `SSO_URI` отсутствует или закомментирована. В `docker-compose.yaml` уже выставлено правильное значение `http://trackme-sso:9000`.
 
-### Браузер редиректит на `http://host.docker.internal:9000`
+### Браузер редиректит на `http://trackme-sso:9000`
 
 **Причина**: `authorization-uri` настроен на внутренний адрес вместо публичного.
 **Решение**: в профиле `docker-local` gateway-а значение `authorization-uri` должно быть `http://localhost:9000/oauth2/authorize` — проверьте `apps/trackme-gateway/src/main/resources/application.yaml`.

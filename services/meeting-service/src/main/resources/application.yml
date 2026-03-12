@@ -98,7 +98,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://host.docker.internal:9000
+          issuer-uri: http://trackme-sso:9000
 logging:
   level:
     org.springframework.security: trace
